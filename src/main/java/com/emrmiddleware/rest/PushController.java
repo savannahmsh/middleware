@@ -55,10 +55,12 @@ public class PushController {
 			responsedto.setStatus(Resources.OK);
 			responsedto.setData(pulldatadto);
 		} catch (DAOException e) {
+			e.printStackTrace();
 			logger.error(Resources.DAOEXCEPTION, e);
 			responsedto.setStatusMessage(Resources.ERROR, Resources.SERVER_ERROR, Resources.UNABLETOPROCESS);
 			return Response.status(500).entity(gson.toJson(responsedto)).build();
 		} catch (Exception e) {
+			e.printStackTrace();
 			logger.error(Resources.CONTROLLEREXCEPTION + e.getMessage());
 			responsedto.setStatusMessage(Resources.ERROR, Resources.SERVER_ERROR, Resources.UNABLETOPROCESS);
 			return Response.status(500).entity(gson.toJson(responsedto)).build();

@@ -1,6 +1,9 @@
 package com.emrmiddleware.dao;
 
 import java.util.ArrayList;
+
+import com.emrmiddleware.dmo.EncounterDMO;
+import com.emrmiddleware.dmo.UserCredentialsDMO;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -17,9 +20,7 @@ import com.emrmiddleware.exception.DAOException;
 public class ProviderDAO {
 	private final Logger logger = LoggerFactory.getLogger(ProviderDAO.class);
 	public ArrayList<ProviderDTO> getProviders(String lastpulldatatime) throws DAOException {
-
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		ArrayList<ProviderDTO> providerlist = new ArrayList<ProviderDTO>();
 		try {
 
@@ -35,9 +36,7 @@ public class ProviderDAO {
 	}
 	
 	public ArrayList<ProviderAttributeTypeDTO> getProviderAttributeTypeMaster(String lastpulldatatime) throws DAOException {
-
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		ArrayList<ProviderAttributeTypeDTO> providerAttributeTypeList = new ArrayList<ProviderAttributeTypeDTO>();
 		try {
 
@@ -54,9 +53,7 @@ public class ProviderDAO {
 
 
 	public ArrayList<ProviderAttributeDTO> getProviderAttributes(String lastpulldatatime) throws DAOException {
-
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		ArrayList<ProviderAttributeDTO> providerAttributeList = new ArrayList<ProviderAttributeDTO>();
 		try {
 
@@ -69,6 +66,12 @@ public class ProviderDAO {
 		} finally {
 			session.close();
 		}
+	}
+
+	private SqlSession getSession(){
+		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
+		sessionfactory.getConfiguration().addMapper(ProviderDMO.class);
+		return sessionfactory.openSession();
 	}
 
 }

@@ -1,6 +1,9 @@
 package com.emrmiddleware.dao;
 
 import java.util.ArrayList;
+
+import com.emrmiddleware.dmo.EncounterDMO;
+import com.emrmiddleware.dmo.UserCredentialsDMO;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -18,8 +21,7 @@ public class ObsDAO {
 	private final Logger logger = LoggerFactory.getLogger(ObsDAO.class);
 	public ArrayList<ObsDTO> getObsList(String lastpulldatatime, String locationuuid) throws DAOException {
 
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		ArrayList<ObsDTO> obslist = new ArrayList<ObsDTO>();
 		try {
 
@@ -34,6 +36,12 @@ public class ObsDAO {
 		} finally {
 			session.close();
 		}
+	}
+
+	private SqlSession getSession(){
+		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
+		sessionfactory.getConfiguration().addMapper(ObsDMO.class);
+		return sessionfactory.openSession();
 	}
 	
 }

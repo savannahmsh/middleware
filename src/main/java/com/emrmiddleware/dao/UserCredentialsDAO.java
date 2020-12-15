@@ -18,7 +18,9 @@ public class UserCredentialsDAO {
 	public UserCredentialDTO getUserCredentail(String username) throws DAOException {
 
 		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
+		sessionfactory.getConfiguration().addMapper(UserCredentialsDMO.class);
 		SqlSession session = sessionfactory.openSession();
+
 		UserCredentialDTO userCredentialdto =null;
 		try {
 

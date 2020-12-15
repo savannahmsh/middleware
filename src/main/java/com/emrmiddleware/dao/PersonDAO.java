@@ -1,5 +1,7 @@
 package com.emrmiddleware.dao;
 
+import com.emrmiddleware.dmo.EncounterDMO;
+import com.emrmiddleware.dmo.UserCredentialsDMO;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -16,8 +18,7 @@ public class PersonDAO {
 	private final Logger logger = LoggerFactory.getLogger(PersonDAO.class);
 	public PersonDTO getPerson(String personuuid) throws DAOException {
 
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		PersonDTO persondto = new PersonDTO();
 		try {
 
@@ -30,6 +31,12 @@ public class PersonDAO {
 		} finally {
 			session.close();
 		}
+	}
+
+	private SqlSession getSession(){
+		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
+		sessionfactory.getConfiguration().addMapper(PersonDMO.class);
+		return sessionfactory.openSession();
 	}
 	
 }

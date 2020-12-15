@@ -1,4 +1,12 @@
 # Middleware
+##Installation/setup steps
+  1. update the database credentials to point to the openmrs database `src/main/resources/db_properties.xml`
+  2. update the openmrs server details in the file `src/main/resources/config.properties`
+  3. If openMrs is deployed in a standalone environment, update the `openmrs` path in the file `src/main/java/com/emrmiddleware/conf/ResourcesEnvironment.java` to `openmrs-standalone`
+  4. Build project with `mvn clean install` and deploy the generated .war file `target/EMR-Middleware.war`
+  
+  
+  --------------------------------------------------------------------
 This is the repository for the middleware/Sync Module which will interact with the server. The goal of this module is to,
 (1) Set up offline syncing between mobile clients and the back-end server so that health workers can collect data in offline mode and sync with the server when the internet connection is re-established. It also tracks failures in data upload during poor or jittery network connections or high latency connections to minimize data loss.
 (2) Patient record syncing between different devices registered to the same clinic location so that all patients are shared between health workers working at a clinic

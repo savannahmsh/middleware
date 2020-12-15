@@ -2,6 +2,8 @@ package com.emrmiddleware.dao;
 
 import java.util.ArrayList;
 
+import com.emrmiddleware.dmo.EncounterDMO;
+import com.emrmiddleware.dmo.UserCredentialsDMO;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -20,8 +22,7 @@ public class PatientDAO {
 	private final Logger logger = LoggerFactory.getLogger(PatientDAO.class);
 	public ArrayList<PatientDTO> getPatients(String lastpulldatatime, String locationuuid) throws DAOException {
 
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		ArrayList<PatientDTO> patientlist = new ArrayList<PatientDTO>();
 		try {
 
@@ -39,8 +40,7 @@ public class PatientDAO {
 	public ArrayList<PatientAttributeTypeDTO> getPatientAttributeType(String lastpulldatatime, String locationuuid)
 			throws DAOException {
 
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		ArrayList<PatientAttributeTypeDTO> patientAttributeTypeList = new ArrayList<PatientAttributeTypeDTO>();
 		try {
 
@@ -57,9 +57,7 @@ public class PatientDAO {
 
 	public ArrayList<PatientAttributeDTO> getPatientAttributes(String lastpulldatatime, String locationuuid)
 			throws DAOException {
-
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		ArrayList<PatientAttributeDTO> patientAttributesList = new ArrayList<PatientAttributeDTO>();
 		try {
 
@@ -75,8 +73,7 @@ public class PatientDAO {
 	}
 
 	public PatientDTO getPatient(String personuuid) throws DAOException {
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		PatientDTO patientdto = new PatientDTO();
 		try {
 
@@ -89,6 +86,12 @@ public class PatientDAO {
 		} finally {
 			session.close();
 		}
+	}
+
+	private SqlSession getSession(){
+		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
+		sessionfactory.getConfiguration().addMapper(PatientDMO.class);
+		return sessionfactory.openSession();
 	}
 
 }

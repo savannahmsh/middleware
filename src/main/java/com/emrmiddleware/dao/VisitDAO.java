@@ -3,6 +3,8 @@ package com.emrmiddleware.dao;
 
 
 import java.util.ArrayList;
+
+import com.emrmiddleware.dmo.EncounterDMO;
 import org.apache.ibatis.exceptions.PersistenceException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -20,9 +22,7 @@ public class VisitDAO {
 
 	private final Logger logger = LoggerFactory.getLogger(VisitDAO.class);
 	public ArrayList<VisitDTO> getVisits(String lastpulldatatime, String locationuuid) throws DAOException {
-
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		ArrayList<VisitDTO> visitlist = new ArrayList<VisitDTO>();
 		try {
 
@@ -38,9 +38,7 @@ public class VisitDAO {
 	}
 	
 	public VisitDTO getVisit(String visituuid) throws DAOException {
-
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		VisitDTO visitdto = new VisitDTO();
 		try {
 
@@ -56,9 +54,7 @@ public class VisitDAO {
 	}
 	
 	public String getDBCurrentTime() throws DAOException {
-
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		String currentTime=null;
 		try {
 
@@ -74,9 +70,7 @@ public class VisitDAO {
 	}
 	
 	public ArrayList<VisitAttributeTypeDTO> getVisitAttributeTypeMaster(String lastpulldatatime) throws DAOException {
-
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		ArrayList<VisitAttributeTypeDTO> visitAttributeMasterList= new ArrayList<VisitAttributeTypeDTO>();
 		try {
 
@@ -92,9 +86,7 @@ public class VisitDAO {
 	}
 	
 	public ArrayList<VisitAttributeDTO> getVisitAttributes(String lastpulldatatime,String locationuuid) throws DAOException {
-
-		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		SqlSession session = sessionfactory.openSession();
+		SqlSession session = getSession();
 		ArrayList<VisitAttributeDTO> visitAttributesList= new ArrayList<VisitAttributeDTO>();
 		try {
 
@@ -108,8 +100,12 @@ public class VisitDAO {
 			session.close();
 		}
 	}
-	
-	
+
+	private SqlSession getSession(){
+		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
+		sessionfactory.getConfiguration().addMapper(VisitDMO.class);
+		return sessionfactory.openSession();
+	}
 
 }
 
