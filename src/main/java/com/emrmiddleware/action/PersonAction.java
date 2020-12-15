@@ -53,7 +53,7 @@ public class PersonAction {
 				persons.add(persondto);
 			}
 		} catch (Exception e) {
-			 logger.error("Error occurred for json string : "+gson.toJson(personforerror));
+//			 logger.error("Error occurred for json string : "+gson.toJson(personforerror));
 			 logger.error(e.getMessage(),e);
 			//throw new ActionException(e.getMessage(), e);
 		}

@@ -14,20 +14,24 @@ public class CustomApplication extends ResourceConfig
 {
     public CustomApplication() 
     { 
-        packages("com.emrmiddleware.rest");
-        packages("com.emrmiddleware.conf");
-        property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
-        // @ValidateOnExecution annotations on subclasses won't cause errors.
-        property(ServerProperties.BV_DISABLE_VALIDATE_ON_EXECUTABLE_OVERRIDE_CHECK, true);
-        register(RolesAllowedDynamicFeature.class);
-      //  register(AuthenticationFilter.class);
+       try {
+           packages("com.emrmiddleware.rest");
+           packages("com.emrmiddleware.conf");
+           property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
+           // @ValidateOnExecution annotations on subclasses won't cause errors.
+           property(ServerProperties.BV_DISABLE_VALIDATE_ON_EXECUTABLE_OVERRIDE_CHECK, true);
+           register(RolesAllowedDynamicFeature.class);
+           //  register(AuthenticationFilter.class);
       /*  register(AuthenticationResponseFilter.class);
         register(ClientAccessFilter.class);
         register(com.mahindraagri.conf.ConstraintViolationMapper.class);*/
-        /*-------------------------------Trying to enable moxy-------*/
-       register(JsonProcessingFeature.class);
-        property(JsonGenerator.PRETTY_PRINTING, true);
-        /*-------------------------------*/
+           /*-------------------------------Trying to enable moxy-------*/
+           register(JsonProcessingFeature.class);
+           property(JsonGenerator.PRETTY_PRINTING, true);
+           /*-------------------------------*/
+       }catch (Exception ex){
+           ex.printStackTrace();
+       }
       
        
         

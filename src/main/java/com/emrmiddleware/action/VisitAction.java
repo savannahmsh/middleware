@@ -52,7 +52,7 @@ public class VisitAction {
 				visits.add(visitdto);
 			}
 		} catch (Exception e) {
-			logger.error("Error occurred for json string : " + gson.toJson(visitforerror));
+//			logger.error("Error occurred for json string : " + gson.toJson(visitforerror));
 			logger.error(e.getMessage(), e);
 			// throw new ActionException(e.getMessage(), e);
 		}

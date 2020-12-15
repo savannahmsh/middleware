@@ -89,7 +89,7 @@ public class EncounterAction {
 				encounters.add(encounterdto);
 			}
 		} catch (Exception e) {
-			logger.error("Error occurred for json string : " + gson.toJson(encounterforerror));
+//			logger.error("Error occurred for json string : " + gson.toJson(encounterforerror));
 			logger.error(e.getMessage(), e);
 		}
 		return encounters;
