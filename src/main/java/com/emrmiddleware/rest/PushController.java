@@ -40,9 +40,13 @@ public class PushController {
 		Gson gson = new Gson();
 		String authString = null;
 		try {
+			logger.info("No Authorization");
+
 			AuthenticationUtil authutil = new AuthenticationUtil();	
 			authString= httpHeaders.getHeaderString("authorization");
+			logger.info("No Authorization");
 			boolean isAuthenticated = authutil.isUserAuthenticated(authString);
+			logger.info("No Authorization");
 			if ((isAuthenticated == false) || (authString == null)) {
 				logger.error("No Authorization");
 				responsedto.setStatusMessage(Resources.ERROR, Resources.AUTHERROR, Resources.UNABLETOPROCESS);
@@ -56,10 +60,15 @@ public class PushController {
 			responsedto.setData(pulldatadto);
 		} catch (DAOException e) {
 			e.printStackTrace();
+			logger.info("No Authorization");
+
 			logger.error(Resources.DAOEXCEPTION, e);
+
 			responsedto.setStatusMessage(Resources.ERROR, Resources.SERVER_ERROR, Resources.UNABLETOPROCESS);
 			return Response.status(500).entity(gson.toJson(responsedto)).build();
 		} catch (Exception e) {
+			logger.info("No Authorization");
+
 			e.printStackTrace();
 			logger.error(Resources.CONTROLLEREXCEPTION + e.getMessage());
 			responsedto.setStatusMessage(Resources.ERROR, Resources.SERVER_ERROR, Resources.UNABLETOPROCESS);
