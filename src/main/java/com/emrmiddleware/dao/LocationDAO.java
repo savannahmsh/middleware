@@ -37,7 +37,7 @@ public class LocationDAO {
 
 	private SqlSession getSession(){
 		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		sessionfactory.getConfiguration().addMapper(LocationDMO.class);
+//		sessionfactory.getConfiguration().addMapper(LocationDMO.class);
 		return sessionfactory.openSession();
 	}
 }

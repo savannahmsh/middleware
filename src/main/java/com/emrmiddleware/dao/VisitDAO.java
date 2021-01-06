@@ -103,7 +103,7 @@ public class VisitDAO {
 
 	private SqlSession getSession(){
 		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		sessionfactory.getConfiguration().addMapper(VisitDMO.class);
+//		sessionfactory.getConfiguration().addMapper(VisitDMO.class);
 		return sessionfactory.openSession();
 	}
 

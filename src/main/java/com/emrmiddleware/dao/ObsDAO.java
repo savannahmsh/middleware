@@ -40,7 +40,7 @@ public class ObsDAO {
 
 	private SqlSession getSession(){
 		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		sessionfactory.getConfiguration().addMapper(ObsDMO.class);
+//		sessionfactory.getConfiguration().addMapper(ObsDMO.class);
 		return sessionfactory.openSession();
 	}
 	

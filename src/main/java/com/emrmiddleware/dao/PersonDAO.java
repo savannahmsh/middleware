@@ -35,7 +35,7 @@ public class PersonDAO {
 
 	private SqlSession getSession(){
 		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		sessionfactory.getConfiguration().addMapper(PersonDMO.class);
+//		sessionfactory.getConfiguration().addMapper(PersonDMO.class);
 		return sessionfactory.openSession();
 	}
 	

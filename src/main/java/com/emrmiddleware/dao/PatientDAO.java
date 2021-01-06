@@ -90,7 +90,7 @@ public class PatientDAO {
 
 	private SqlSession getSession(){
 		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		sessionfactory.getConfiguration().addMapper(PatientDMO.class);
+//		sessionfactory.getConfiguration().addMapper(PatientDMO.class);
 		return sessionfactory.openSession();
 	}
 

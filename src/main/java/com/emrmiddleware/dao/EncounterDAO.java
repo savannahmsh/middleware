@@ -53,7 +53,7 @@ public class EncounterDAO {
 
 	private SqlSession getSession(){
 		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		sessionfactory.getConfiguration().addMapper(EncounterDMO.class);
+//		sessionfactory.getConfiguration().addMapper(EncounterDMO.class);
 		return sessionfactory.openSession();
 	}
 }

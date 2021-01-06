@@ -70,7 +70,7 @@ public class ProviderDAO {
 
 	private SqlSession getSession(){
 		SqlSessionFactory sessionfactory = DBconfig.getSessionFactory();
-		sessionfactory.getConfiguration().addMapper(ProviderDMO.class);
+//		sessionfactory.getConfiguration().addMapper(ProviderDMO.class);
 		return sessionfactory.openSession();
 	}
 
