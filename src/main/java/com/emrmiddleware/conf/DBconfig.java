@@ -11,6 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.ibatis.session.TransactionIsolationLevel;
+import com.emrmiddleware.dmo.*;
 
 public class DBconfig {
 
@@ -27,6 +28,14 @@ public class DBconfig {
 		try {
 			inputStream = Resources.getResourceAsStream(resource);
 			sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream,environment);
+			sqlSessionFactory.getConfiguration().addMapper(PersonDMO.class);
+			sqlSessionFactory.getConfiguration().addMapper(ProviderDMO.class);
+			sqlSessionFactory.getConfiguration().addMapper(VisitDMO.class);
+			sqlSessionFactory.getConfiguration().addMapper(UserCredentialsDMO.class);
+			sqlSessionFactory.getConfiguration().addMapper(PatientDMO.class);
+			sqlSessionFactory.getConfiguration().addMapper(LocationDMO.class);
+			sqlSessionFactory.getConfiguration().addMapper(EncounterDMO.class);
+			sqlSessionFactory.getConfiguration().addMapper(ObsDMO.class);
 			inputStream.close();
 		} catch (IOException e) {
 			logger.error("Exception in DBconfig",e);		
