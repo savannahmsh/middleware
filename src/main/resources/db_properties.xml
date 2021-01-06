@@ -15,10 +15,9 @@
         <property name="poolMaximumIdleConnections"       value="3"/>
         <property name="poolMaximumCheckoutTime"          value="25000"/> 
         <property name="driver" value="com.mysql.jdbc.Driver"/>  
-       <property name="url" value="jdbc:mysql://127.0.0.1:3306/openmrs?stringtype=unspecified"/>
-          <!-- serverTimezone=UTC -->
+       <property name="url" value="jdbc:mysql://127.0.0.1:3306/openmrs?stringtype=unspecified&amp;serverTimezone=UTC"/>
         <property name="username" value="root"/>
-        <property name="password" value="!nt3L@20!9"/>
+        <property name="password" value="bright1008"/>
       </dataSource>
     </environment>
    
